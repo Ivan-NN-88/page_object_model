@@ -1,2 +1,3 @@
-# page_object_model
-Применение паттерна Page Object Model
+# 4. Применение паттерна Page Object Model
+---
+4-й шаг курса "Автоматизация тестирования с помощью Selenium и Python".
