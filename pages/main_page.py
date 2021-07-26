@@ -12,5 +12,5 @@ class MainPage(BasePage):
         login_link.click()
 
     def should_be_login_link(self):
-        """Проверка ссылки на страницу авторизации (Заведомо ложный метод)."""
-        self.browser.find_element(By.CSS_SELECTOR, '#login_link_invalid')
+        """Проверка ссылки на страницу авторизации."""
+        assert self.is_element_present(By.CSS_SELECTOR, '#login_link'), 'Login link is not presented!'
