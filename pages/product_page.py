@@ -1,6 +1,5 @@
 """Страница товара."""
 from selenium.webdriver.common.by import By
-import time
 
 from .base_page import BasePage
 from .locators import ProductPageLocators
@@ -15,7 +14,7 @@ class ProductPage(BasePage):
         product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE).text
 
         # Нажимаю на кнопку "Добавить в корзину".
-        self.browser.find_element(*ProductPageLocators.BUTTON_ADD_TO_BUSKET).click()
+        self.browser.find_element(*ProductPageLocators.BUTTON_ADD_TO_BASKET).click()
         # Высчитываем результат математического выражения из диалогового окна
         self.solve_quiz_and_get_code()
 
@@ -31,9 +30,9 @@ class ProductPage(BasePage):
         :param start_product_name: Изначальное наименование товара, перед добавлением в корзину.
         """
 
-        assert start_product_name in self.browser.find_element(
-            *ProductPageLocators.PRODUCT_NAME_IN_MESSAGE).text, \
-            "PRODUCT NAME - Message is not found or product name not correct!"
+        assert start_product_name == self.browser.find_element(
+            *ProductPageLocators.PRODUCT_NAME_IN_MESSAGE).text.replace(' has been added to your basket.', ''), \
+            "PRODUCT NAME - Message is not found or product name is incorrect!"
 
     def should_be_product_price(self, start_product_price: str):
         """
@@ -41,6 +40,6 @@ class ProductPage(BasePage):
         :param start_product_price: Изначальная цена товара, перед добавлением в корзину.
         """
 
-        assert start_product_price in self.browser.find_element(
-            *ProductPageLocators.PRODUCT_PRICE_IN_MESSAGE).text, \
-            "PRICE - Message is not found or product name not correct!"
+        assert start_product_price == self.browser.find_element(
+            *ProductPageLocators.PRODUCT_PRICE_IN_MESSAGE).text.replace('Your basket total is now ', ''), \
+            "PRICE - Message is not found or price is incorrect!"
