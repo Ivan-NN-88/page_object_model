@@ -1,7 +1,11 @@
 """Базовая страница для проекта: BasePage."""
 import math
+
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class BasePage:
@@ -18,8 +22,8 @@ class BasePage:
     def is_element_present(self, how, what: str):
         """
         Ищет элемент и перехватывает исключение.
-        :param how: как искать (css, id, xpath и тд: By.CSS_SELECTOR)
-        :param what: что искать (строка-селектор)
+        :param how: как искать (css, id, xpath и тд: By.CSS_SELECTOR).
+        :param what: что искать (строка-селектор).
         """
 
         try:
@@ -27,6 +31,37 @@ class BasePage:
             return True
         except NoSuchElementException:
             return False
+
+    def is_not_element_present(self, how, what, timeout=4):
+        """
+        Проверяет, что элемент не появляется на странице в течение заданного времени.
+        :param how: как искать (css, id, xpath и тд: By.CSS_SELECTOR).
+        :param what: что искать (строка-селектор).
+        :param timeout: время ожидания элемента.
+        """
+
+        try:
+            WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
+        except TimeoutException:
+            return True
+
+        return False
+
+    def is_disappeared(self, how, what, timeout=4):
+        """
+        Проверяет, что элемент исчез на странице в течение заданного времени.
+        :param how: как искать (css, id, xpath и тд: By.CSS_SELECTOR).
+        :param what: что искать (строка-селектор).
+        :param timeout: время ожидания элемента.
+        """
+
+        try:
+            WebDriverWait(self.browser, timeout, 1, TimeoutException). \
+                until_not(EC.presence_of_element_located((how, what)))
+        except TimeoutException:
+            return False
+
+        return True
 
     def solve_quiz_and_get_code(self):
         """Высчитывает результат математического выражения из диалогового окна."""

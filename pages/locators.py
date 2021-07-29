@@ -20,3 +20,4 @@ class ProductPageLocators:
     PRODUCT_PRICE = (By.XPATH, '//p[@class="price_color"]')
     PRODUCT_PRICE_IN_MESSAGE = (By.XPATH, '//div[@id="messages"]//div[3]//div[1]//p[1]')
     BUTTON_ADD_TO_BASKET = (By.XPATH, '//button[contains(@class, "btn-add-to-basket")]')
+    SUCCESS_MESSAGE = (By.XPATH, '//div[@id="messages"]//div[1]')

@@ -43,3 +43,13 @@ class ProductPage(BasePage):
         assert start_product_price == self.browser.find_element(
             *ProductPageLocators.PRODUCT_PRICE_IN_MESSAGE).text.replace('Your basket total is now ', ''), \
             "PRICE - Message is not found or price is incorrect!"
+
+    def should_be_no_success_message(self):
+        """Проверяет, что блок сообщений не появляется на странице в течение заданного времени."""
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be!"
+
+    def should_be_success_message_disappeared(self):
+        """Проверяет, что блок сообщений исчез на странице в течение заданного времени."""
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is not disappeared!"
