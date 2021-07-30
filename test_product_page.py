@@ -27,6 +27,31 @@ def test_guest_can_add_product_to_basket(browser, link):
     page.should_be_product_page()
 
 
+def test_guest_can_go_to_login_page_from_product_page(browser):
+    """
+    Проверка на возможность перехода на страницу авторизации со страницы товара.
+    :param browser: объект браузера.
+    """
+
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    print(f'Тестирую ссылку: [{link}]...')
+    page = ProductPage(browser, link)
+    page.open()
+    page.go_to_login_page()
+
+
+def test_guest_cant_see_success_message(browser):
+    """
+    Проверка на отсутствие сообщений об успехе перед добавлением товара в корзину.
+    :param browser: объект браузера.
+    """
+
+    print(f'Тестирую ссылку: [{main_link}]...')
+    page = ProductPage(browser, main_link)
+    page.open()
+    page.should_be_no_success_message()
+
+
 def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
     """
     Проверка на отсутствие сообщений об успехе после добавления товара в корзину.
@@ -43,16 +68,17 @@ def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
     page.should_be_no_success_message()
 
 
-def test_guest_cant_see_success_message(browser):
+def test_guest_should_see_login_link_on_product_page(browser):
     """
-    Проверка на отсутствие сообщений об успехе перед добавлением товара в корзину.
+    Проверка на присутствие ссылки авторизации на странице товара.
     :param browser: объект браузера.
     """
 
-    print(f'Тестирую ссылку: [{main_link}]...')
-    page = ProductPage(browser, main_link)
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    print(f'Тестирую ссылку: [{link}]...')
+    page = ProductPage(browser, link)
     page.open()
-    page.should_be_no_success_message()
+    page.should_be_login_link()
 
 
 def test_message_disappeared_after_adding_product_to_basket(browser):

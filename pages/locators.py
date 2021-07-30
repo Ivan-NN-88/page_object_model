@@ -2,9 +2,10 @@
 from selenium.webdriver.common.by import By
 
 
-class MainPageLocators:
-    """Селектора главной страницы."""
-    LOGIN_LINK = (By.CSS_SELECTOR, '#login_link')
+class BasePageLocators():
+    """Общие селектора."""
+    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
 
 
 class LoginPageLocators:
