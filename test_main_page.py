@@ -6,11 +6,12 @@ from .pages.basket_page import BasketPage
 
 def test_guest_can_go_to_login_page(browser):
     """
-    Тест на основе Page Object.
+    Тест на переход с главной страницы на страницу авторизации.
     :param browser: объект браузера.
     """
 
     link = 'http://selenium1py.pythonanywhere.com/'
+    print(f'[{link}] - Тест на переход с главной страницы на страницу авторизации...')
     page = MainPage(browser, link)
     page.open()
     page.go_to_login_page()
@@ -25,7 +26,7 @@ def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
     """
 
     link = "http://selenium1py.pythonanywhere.com"
-    print(f'Тестирую ссылку: [{link}]...')
+    print(f'[{link}] - Проверка, что после перехода с главной страницы в корзину, не должно быть товаров в корзине...')
     page = BasketPage(browser, link)
     page.open()
     page.is_cant_see_product_in_basket_opened_from_page()
@@ -34,6 +35,7 @@ def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
 def test_guest_should_be_login_page(browser):
     """Тест страницы авторизации."""
     link = 'http://selenium1py.pythonanywhere.com/en-gb/accounts/login/'
+    print(f'[{link}] - Тест страницы авторизации...')
     page = LoginPage(browser, link)
     page.open()
     page.should_be_login_page()
@@ -46,6 +48,7 @@ def test_guest_should_see_login_link(browser):
     """
 
     link = 'http://selenium1py.pythonanywhere.com/'
+    print(f'[{link}] - Тест должен увидеть ссылку на страницу авторизации...')
     page = MainPage(browser, link)
     page.open()
     page.should_be_login_link()

@@ -7,11 +7,8 @@ class BasketPage(BasePage):
     """Страница корзины товаров."""
     def is_cant_see_product_in_basket_opened_from_page(self):
         """Проверка на то, что после перехода в корзину, не должно быть товаров в корзине."""
-        # Переходит в корзину по кнопке в шапке сайта.
         self.go_to_basket()
-        # Ожидаем, что в корзине нет товаров
         self.not_should_be_basket_items()
-        # Ожидаем, что есть текст о том что корзина пуста
         self.should_be_text_about_empty_basket()
 
     def not_should_be_basket_items(self):

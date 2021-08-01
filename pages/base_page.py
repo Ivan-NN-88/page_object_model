@@ -75,6 +75,11 @@ class BasePage:
         """Открывает нужную страницу в браузере."""
         self.browser.get(self.url)
 
+    def should_be_authorized_user(self):
+        """Проверяет, что пользователь залогинен."""
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
+                                                                     " probably unauthorised user"
+
     def should_be_login_link(self):
         """Проверка ссылки на страницу авторизации."""
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), 'Login link is not presented!'
